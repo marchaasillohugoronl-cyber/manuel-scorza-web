@@ -1,0 +1,99 @@
+/* Footer.css */
+.footer {
+  background: #04080f;
+  color: white;
+  font-family: 'Cinzel', serif;
+  border-top: 1px solid rgba(92,241,5,0.15);
+  padding: 50px clamp(20px,6vw,100px) 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.footer-logo {
+  height: 55px;
+  margin-bottom: 14px;
+}
+
+.footer-col p {
+  font-family: Georgia, serif;
+  font-size: 13px;
+  line-height: 1.8;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-col h4 {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgb(92,241,5);
+  margin-bottom: 16px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col ul li {
+  font-size: 13px;
+  letter-spacing: 1px;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: color 0.2s, opacity 0.2s;
+}
+
+.footer-col ul li:hover {
+  opacity: 1;
+  color: rgb(92,241,5);
+}
+
+.footer-redes {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.footer-redes a {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.footer-redes a:hover {
+  background: rgb(92,241,5);
+  color: #04080f;
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 16px 0;
+  font-family: Georgia, serif;
+  font-size: 12px;
+  opacity: 0.4;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}

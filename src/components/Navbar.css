@@ -1,0 +1,242 @@
+/* ============================================================
+   VARIABLES GLOBALES
+   ============================================================ */
+:root {
+  --gothic:          'Cinzel', serif;
+  --nav-green:       rgb(92, 241, 5);
+  --nav-green-glow:  rgba(92, 241, 5, 0.35);
+  --nav-bg-mobile:   #0b1120;
+  --nav-blur-mobile: blur(16px);
+  --transition:      0.3s ease;
+}
+
+
+/* ============================================================
+   NAVBAR
+   Glassmorphism sutil: fondo traslúcido + blur al hacer scroll.
+   Agrega la clase .scrolled con JS cuando window.scrollY > 60.
+   ============================================================ */
+.navbar {
+  position: fixed;               /* fixed > absolute: se queda visible al hacer scroll */
+  top: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 60px;
+
+  color: var(--nav-green);
+  font-family: var(--gothic);
+  font-size: 13px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+
+  z-index: 100;
+
+  /* Estado inicial: transparente */
+  background: transparent;
+  transition: background var(--transition), padding var(--transition), box-shadow var(--transition);
+}
+
+/* Al hacer scroll — fondo oscuro translúcido */
+.navbar.scrolled {
+  background: rgba(11, 17, 32, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 12px 60px;            /* Se comprime un poco */
+  box-shadow: 0 1px 0 rgba(92, 241, 5, 0.12);
+}
+
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  text-shadow: 0 0 14px var(--nav-green-glow);
+  transition: text-shadow var(--transition);
+}
+
+.logo:hover {
+  text-shadow: 0 0 22px var(--nav-green-glow);
+}
+
+.logo-img {
+  height: 70px;
+  transition: transform var(--transition);
+}
+
+.logo:hover .logo-img {
+  transform: rotate(-3deg) scale(1.05);  /* Micro-interacción al hover */
+}
+
+
+/* ============================================================
+   MENÚ — escritorio
+   ============================================================ */
+.menu {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  font-size: 13px;
+  letter-spacing: 2.5px;
+}
+
+.menu li {
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition), text-shadow var(--transition);
+}
+
+.menu li:hover {
+  text-shadow: 0 0 10px var(--nav-green-glow);
+}
+
+/* Línea animada debajo */
+.menu li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 1px;
+  background: var(--nav-green);
+  box-shadow: 0 0 6px var(--nav-green-glow);
+  transition: width var(--transition);
+}
+
+.menu li:hover::after {
+  width: 100%;
+}
+
+/* Ítem activo (agrega la clase .active con JS según la sección visible) */
+.menu li.active {
+  color: white;
+  text-shadow: 0 0 10px var(--nav-green-glow);
+}
+
+.menu li.active::after {
+  width: 100%;
+}
+
+
+/* ============================================================
+   HAMBURGER — solo móvil
+   ============================================================ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  gap: 5px;
+  padding: 4px;
+}
+
+.hamburger div {
+  width: 24px;
+  height: 2px;
+  background: var(--nav-green);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Animación X al abrir — agrega .open al .hamburger con JS */
+.hamburger.open div:nth-child(1) { transform: translateY(7px) rotate(45deg);  }
+.hamburger.open div:nth-child(2) { opacity: 0;                                 }
+.hamburger.open div:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ============================================================
+   MOBILE — ≤ 768px
+   ============================================================ */
+@media (max-width: 768px) {
+
+  .navbar {
+    padding: 16px 24px;
+  }
+
+  .navbar.scrolled {
+    padding: 12px 24px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Panel desplegable */
+  .menu {
+    position: absolute;
+    top: 100%;             /* Justo debajo del navbar, sin importar su altura */
+    left: 0;
+    width: 100%;
+
+    flex-direction: column;
+    align-items: center;
+    gap: 0;                /* Gap manejado con padding en cada li */
+
+    background: rgba(11, 17, 32, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    padding: 0;
+    max-height: 0;         /* Animación de apertura con max-height */
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+
+    border-top: 1px solid rgba(92, 241, 5, 0.15);
+  }
+
+  .menu li {
+    width: 100%;
+    text-align: center;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 13px;
+  }
+
+  .menu li:last-child {
+    border-bottom: none;
+  }
+
+  /* Abierto: JS agrega .active al .menu */
+  .menu.active {
+    max-height: 500px;     /* Suficiente para cualquier cantidad de ítems */
+    padding: 8px 0;
+  }
+
+}
+
+
+/* ============================================================
+   TABLET — 768px a 1024px
+   Reduce padding lateral y tamaño de fuente del menú
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .navbar {
+    padding: 18px 32px;
+  }
+
+  .navbar.scrolled {
+    padding: 12px 32px;
+  }
+
+  .menu {
+    gap: 22px;
+    font-size: 11px;
+  }
+
+}

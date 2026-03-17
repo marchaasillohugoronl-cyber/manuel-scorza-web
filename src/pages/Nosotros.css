@@ -1,0 +1,156 @@
+/* ============================================================
+   SECCIÓN NOSOTROS
+   ============================================================ */
+
+.nosotros {
+  width: 100%;
+  padding: clamp(60px, 8vw, 110px) clamp(20px, 6vw, 100px);
+  background: #0a0f1e;
+  color: white;
+  font-family: 'Cinzel', serif;
+}
+
+
+/* ── Encabezado ─────────────────────────────────────────── */
+
+.nosotros-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto clamp(40px, 6vw, 70px);
+}
+
+.nosotros-badge {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #65ea06;
+  border: 1px solid rgba(101, 234, 6, 0.35);
+  border-radius: 20px;
+  padding: 5px 16px;
+  margin-bottom: 18px;
+}
+
+.nosotros-header h2 {
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+
+.nosotros-header h2 em {
+  font-style: normal;
+  color: #65ea06;
+}
+
+.nosotros-desc {
+  font-family: Georgia, serif;   /* Prosa más legible en body text */
+  font-size: clamp(15px, 1.8vw, 18px);
+  line-height: 1.75;
+  opacity: 0.8;
+}
+
+
+/* ── Galería ─────────────────────────────────────────────── */
+
+.nosotros-galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(16px, 2.5vw, 28px);
+  margin-bottom: clamp(40px, 6vw, 70px);
+}
+
+.nosotros-card {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.nosotros-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;          /* Todas las fotos con la misma proporción */
+  overflow: hidden;
+}
+
+.nosotros-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+  filter: brightness(0.88);
+}
+
+.nosotros-card:hover .nosotros-img-wrap img {
+  transform: scale(1.06);
+  filter: brightness(1);
+}
+
+/* Etiqueta sobre la foto */
+.nosotros-img-label {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(6, 86, 162, 0.85);
+  color: rgb(255, 255, 255);
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+
+/* ── Stats ───────────────────────────────────────────────── */
+
+.nosotros-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(12px, 2vw, 20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: clamp(30px, 4vw, 50px);
+}
+
+.stat {
+  text-align: center;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.3s ease;
+}
+
+.stat:hover {
+  background: rgba(101, 234, 6, 0.08);
+}
+
+.stat strong {
+  display: block;
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 700;
+  color: #65ea06;
+  margin-bottom: 6px;
+}
+
+.stat span {
+  font-size: clamp(11px, 1.3vw, 14px);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .nosotros-galeria {
+    grid-template-columns: 1fr;   /* Una foto por fila en móvil chico */
+  }
+
+  .nosotros-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

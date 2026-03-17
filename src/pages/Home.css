@@ -1,0 +1,184 @@
+/* ============================================================
+   HERO / PORTADA — Totalmente responsivo
+   Breakpoints:
+     · Móvil chico  < 480px
+     · Móvil        < 768px
+     · Tablet       768px – 1024px
+     · Escritorio   > 1024px
+   ============================================================ */
+
+.hero {
+  width: 100%;
+  min-height: 100vh;           /* min-height en vez de height: nunca corta contenido */
+  height: 100svh;              /* svh = viewport real en móviles (descuenta la barra del browser) */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)),
+    url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj34ivH1sDwSxQDLC68ne0N4g2aiztHVXpvMSn__oh3mhyHnXKLYO640By9QFUB7Z3DkemRV_JatNy5CdN1Ud7B_oANW2H6ikhij0XwN3kteAEZjSzht1isrct-tYBqGmbiIJSWGSAZ_t8F/s1600/DSC05078.JPG")
+    center / cover no-repeat;
+
+  /* Evita que la imagen se mueva en iOS al hacer scroll */
+  background-attachment: scroll;
+
+  color: white;
+  padding: clamp(16px, 5vw, 40px);   /* Padding fluido */
+}
+
+
+/* ============================================================
+   CONTENIDO CENTRAL
+   ============================================================ */
+.hero-content {
+  width: 100%;
+  max-width: min(900px, 90%);  /* Nunca supera 900px ni el 90% del ancho */
+  z-index: 2;
+
+  /* Padding lateral extra en pantallas pequeñas */
+  padding: 0 clamp(12px, 4vw, 32px);
+}
+
+/* Título — escala fluida sin necesitar media queries */
+.hero-content h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(28px, 6vw, 64px);  /* 28px en móvil → 64px en escritorio */
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: clamp(12px, 2.5vw, 24px);
+}
+
+/* Párrafo — también fluido */
+.hero-content p {
+  font-size: clamp(15px, 2.2vw, 22px);
+  line-height: 1.65;
+  opacity: 0.9;
+  margin-bottom: clamp(20px, 3vw, 36px);
+
+  /* Limita el ancho del texto para no estirar demasiado en pantallas anchas */
+  max-width: 65ch;
+  margin-inline: auto;
+}
+
+/* Botón CTA */
+.hero-content button {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(13px, 1.8vw, 16px);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  padding: clamp(11px, 1.8vw, 15px) clamp(22px, 4vw, 36px);
+
+  border: none;
+  border-radius: 6px;
+  background: #0656a2;
+  color: white;
+  cursor: pointer;
+
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+
+  /* Toca bien en móvil — mínimo 44px de alto recomendado por Apple/Google */
+  min-height: 44px;
+}
+
+.hero-content button:hover {
+  background: #65ea06;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(101, 234, 6, 0.35);
+}
+
+.hero-content button:active {
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   TABLET — 768px a 1024px
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .hero {
+    min-height: 90vh;
+  }
+
+  /* En tablet landscape el texto puede ser un poco más grande */
+  .hero-content {
+    max-width: 75%;
+  }
+
+}
+
+
+/* ============================================================
+   MÓVIL — hasta 768px
+   ============================================================ */
+@media (max-width: 768px) {
+
+  .hero {
+    min-height: 85vh;
+    /* Centra un poco más arriba en móvil para que el contenido
+       no quede tapado por teclados virtuales */
+    align-items: center;
+    padding-bottom: 40px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+}
+
+
+/* ============================================================
+   MÓVIL CHICO — hasta 480px (iPhone SE, Galaxy A, etc.)
+   ============================================================ */
+@media (max-width: 480px) {
+
+  .hero {
+    min-height: 100svh;
+  }
+
+  /* El botón ocupa más ancho para que sea fácil de tocar */
+  .hero-content button {
+    width: 100%;
+    max-width: 320px;
+  }
+
+}
+
+
+/* ============================================================
+   LANDSCAPE EN MÓVIL — pantalla girada
+   Reduce altura porque el espacio vertical es muy limitado.
+   ============================================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+
+  .hero {
+    min-height: 100vh;
+    padding-top: 80px;          /* Deja espacio para la navbar */
+    padding-bottom: 30px;
+    align-items: flex-start;    /* Sube el contenido para que todo entre en pantalla */
+  }
+
+  .hero-content h1 {
+    font-size: clamp(22px, 5vw, 36px);
+    margin-bottom: 8px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;      /* Recorta el párrafo a 2 líneas en landscape */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+}
